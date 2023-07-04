@@ -1,4 +1,5 @@
 #include "xmem.h"
+#include <string.h>
 
 void* xmalloc(size_t len)
 {
@@ -33,4 +34,11 @@ void* xrealloc(void* oldptr, size_t new_size)
         exit(EXIT_FAILURE);
     }
     return ptr;
+}
+
+void* copy(void* obj, size_t obj_size)
+{
+    void* result = xmalloc(obj_size);
+    memcpy(result, obj, obj_size);
+    return result;
 }

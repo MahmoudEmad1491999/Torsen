@@ -77,18 +77,21 @@ void array_t_at_set_by_copy(struct array_t *array, int32_t index, void *obj,
 }
 
 void *array_t_at_remove(struct array_t *array, int32_t index,
-                        enum REMOVAL_MODE rmode) {
+                        int32_t rmode) {
     FAIL_IF_NULL(array);
     FAIL_IF_NEGATIVE(index);
 
     if (index < array->len) {
-        if (rmode == REMOVE) {
+        if (rmode == 0) {
             array->arr[index] = NULL;
             array->free_ele(array->arr[index]);
             return NULL;
-        } else {
+        } else if( rmode == 1) {
             array->arr[index] = NULL;
             return array->arr[index];
+        }
+        else {
+            FAIL("Un implemented type of removal.\n");
         }
     } else {
         FAIL("Index Out Of Range.\n");

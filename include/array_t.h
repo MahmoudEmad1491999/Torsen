@@ -6,12 +6,6 @@
 
 struct array_t;
 
-/**
- * Purpose: this enum is used to mark how elements from arrays are removed.
- * REMOVE -> means free the object and don't return.
- * RETURN -> means don't free the element just null out the pointer to it and return it.
- */
-enum REMOVAL_MODE {REMOVE, RETURN};
 
 /**
  * Purpose: this function is used to create An Array Object.
@@ -60,7 +54,8 @@ void array_t_at_set_by_copy(struct array_t* arr, int32_t index, void* obj, size_
 /**
  * Purpose: this function is used to remove an element from the array or return it.
  * @index   the index in question.
- * @mode    wheither to return it or free it. FREE, NULL are possible
+ * @rmode   removal mode: whether to remove the element or to return it.
+ *          0 means free it 1 means return.
  **/
-void* array_t_at_remove(struct array_t* arr, int32_t index, enum REMOVAL_MODE rmode);
+void* array_t_at_remove(struct array_t* arr, int32_t index, int32_t rmode);
 #endif
