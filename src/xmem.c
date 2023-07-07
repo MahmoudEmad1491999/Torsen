@@ -38,7 +38,10 @@ void* xrealloc(void* oldptr, size_t new_size)
 
 void* copy(void* obj, size_t obj_size)
 {
-    void* result = xmalloc(obj_size);
-    memcpy(result, obj, obj_size);
-    return result;
+    if(obj){
+        void* result = xmalloc(obj_size);
+        memcpy(result, obj, obj_size);
+        return result;
+    }
+    return NULL;
 }

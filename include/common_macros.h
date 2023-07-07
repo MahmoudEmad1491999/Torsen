@@ -10,7 +10,7 @@
     }
 
 #define FAIL_IF_NULL(ptr) \
-    if(!ptr) { \
+    if(!(ptr)) { \
         fprintf(stderr, #ptr " is Null.\n");\
         exit(EXIT_FAILURE); \
     }
