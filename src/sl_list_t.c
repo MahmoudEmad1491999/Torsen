@@ -1,5 +1,6 @@
 #include "sl_list_t.h"
 
+
 struct sl_list_t *make_sl_list_t(void (*free_ele)(void *),
                                  int32_t (*compare_ele)(void *data1,
                                                         void *data2)) {
@@ -47,8 +48,15 @@ void sl_list_t_append_by_copy(struct sl_list_t *sl_list, void *data,
                               size_t data_size) {
     FAIL_IF_NULL(sl_list);
     struct sl_list_node *node = xmalloc(sizeof(struct sl_list_node));
-    node->data = copy(data, data_size);
+
+    if(data)
+    {
+        node->data = copy(data, data_size);
+    }else {
+        node->data = NULL;
+    }
     node->next = NULL;
+    
     sl_list->tail->next = node;
     sl_list->tail = node;
 }
@@ -65,7 +73,13 @@ void sl_list_t_prepend_by_copy(struct sl_list_t *sl_list, void *data,
                                size_t data_size) {
     FAIL_IF_NULL(sl_list);
     struct sl_list_node *node = xmalloc(sizeof(struct sl_list_node));
-    node->data = copy(data, data_size);
+    if(data)
+    {
+        node->data = copy(data, data_size);
+    }
+    else {
+        node->data = NULL;
+    }
     node->next = sl_list->head;
     sl_list->head = node;
 }
@@ -80,7 +94,7 @@ void *sl_list_t_delete(struct sl_list_t *sl_list, void *data, int rmode) {
     // this is pointer to the nodes of the list used to traverse it.
     struct sl_list_node *iterator = sl_list->head;
     // as we need to find the node with the data and the node previous to it so that 
-    // it can point to the next one correctly 
+    // it can point to the next one correctly
     // we test the first one that continue on the next one useding the same pointer.
     if(iterator!=NULL)
     {

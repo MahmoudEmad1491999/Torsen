@@ -3,8 +3,13 @@
 
 void* xmalloc(size_t len)
 {
-    void* ptr = malloc(len);
+    if(!len)
+    {
+        FAIL("Cannot Allocate Memeory region of zero size.\n");
+    }
 
+    void* ptr = malloc(len);
+    
     if(!ptr)
     {
         perror("malloc\n");
@@ -15,6 +20,10 @@ void* xmalloc(size_t len)
 
 void* xcalloc(size_t num, size_t size)
 {
+    if(!size)
+    {
+        FAIL("Cannot Allocate Memeory region of zero size.\n");
+    }
     void* ptr = calloc(num, size);
     if(!ptr)
     {
@@ -27,6 +36,10 @@ void* xcalloc(size_t num, size_t size)
 
 void* xrealloc(void* oldptr, size_t new_size)
 {
+    if(!new_size)
+    {
+        FAIL("Cannot Allocate Memeory region of zero size.\n");
+    }
     void* ptr = realloc(oldptr, new_size);
     if(!ptr)
     {

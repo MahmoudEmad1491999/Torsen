@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #define FAIL_IF_NEGATIVE(arg) \
-    if((arg) <= 0) \
+    if((arg) < 0) \
     { \
         fprintf( stderr ,#arg " CANNOT BE NEGATIVE!\n"); \
         exit(-1); \
